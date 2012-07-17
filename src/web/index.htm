@@ -1,0 +1,86 @@
+<%def name="testFunc(x)">
+	x is ${x}
+</%def>
+<!DOCTYPE html>
+<html lang="en">	
+	<head>
+		<meta charset="utf-8">
+		<title>MoviesManager</title>
+	</head>
+	<body>
+		<% 
+		import os
+		import glob
+		jsLocation = "../libraries"
+		cssLocation = "../style"
+				
+		jsFiles = glob.glob(jsLocation + "/*.js") + glob.glob(jsLocation + "/*/*.js")
+		cssFiles = glob.glob(cssLocation + "/*.css") + glob.glob(jsLocation + "/*/*.css")
+		%>
+		<!-- scripts -->
+		% for jsLibrary in jsFiles:
+		<script type="text/javascript" src="libraries/${jsLibrary}"></script>
+		% endfor
+		
+		<!-- css -->
+		% for cssFile in cssFiles:
+		<link rel="stylesheet" href="/style/${cssFile}" type="text/css">
+		% endfor
+		
+		<script>
+			$(function() {
+				var folders = [
+						"abc",
+						"def"
+				];
+				
+				$( "#folder" ).autocomplete({
+					source: function(req, add){
+					
+						xmlhttp=new XMLHttpRequest();
+						xmlhttp.onreadystatechange=function(add)
+					    {
+					        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					        {
+					        	var suggestions = [];
+					        	suggestions.push(xmlhttp.responseText);
+					        	add(suggestions)
+					        }
+				        }
+				        
+				        xmlhttp.open("GET","/GetMatchingPath?InitialPath=" + req, true);
+    					xmlhttp.send();
+					}
+				});
+			});		
+		</script>
+		
+		<h2>Hello MoviesManager user!</h2>
+		<div class="demo">
+			<div class="ui-widget">
+				<label for="folder">Folder:</label>
+				<input id="folder">
+			</div>
+		</div>
+		
+		<form name="inputFolder" method="POST" action="/inputFolder">
+			folder: <input type="text" name="folder" value=${folder}>
+			<br/>
+			pattern: <input type="text" name="pattern" value=${pattern}>
+			<br/>
+			<input type="Submit">
+		</form>
+		% if folders:
+			folders: <br/>
+			% for fold in folders:
+				<b> ${fold} </b> <br/>
+			% endfor
+		% else:
+			no folder <br/>
+		% endif
+		
+		% if not len(exception) == 0:
+			<font color="RED"> ${exception} </font>
+		% endif
+	</body>
+</html>
