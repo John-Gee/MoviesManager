@@ -21,11 +21,14 @@ class MockFileSystem(AFileSystem):
     def IsDir(self, path):
         return path in self.dirs
     
-    def GetFolders(self, path):
+    def GetSubFolders(self, path):
         folders = []
         for p in self.paths:
             if path in p and self.IsDir(p):
                 folders.append(p)
                  
         return folders;
+    
+    def Complete(self, initialPath):
+        return;
             

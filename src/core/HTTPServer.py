@@ -8,14 +8,15 @@ import sys
 import cherrypy
 
 class HTTPServer(object):
-    def __init__(self, port, applicationClass):
+    def __init__(self, port, applicationClass, fileSystem):
         self.port = port
         self.applicationClass = applicationClass
         self.application = None
+        self.fileSystem = fileSystem
         self.ready = False
         
     def SmartMonitor(self):
-        self.application = self.applicationClass(self)
+        self.application = self.applicationClass(self, self.fileSystem)
         
         #If the module is executed as a script __name__ will be '__main__' and sys.argv[0] will be the full path of the module.
         if __name__ == '__main__':

@@ -15,15 +15,17 @@ class BadPath(FilesystemError): pass
 class NotADir(FilesystemError): pass
 
 class MoviesListing(object):
+    def __init__(self, fileSystem):
+        self.fileSystem = fileSystem
         
-    def FindMatchingFoldersInPath(self, path, pattern, fileSystem):
-        if(not fileSystem.Exists(path)):
+    def FindMatchingFoldersInPath(self, path, pattern):
+        if(not self.fileSystem.Exists(path)):
             raise BadPath("The path {0} specified does not exist".format(path))
         
-        if(not fileSystem.IsDir(path)):
+        if(not self.fileSystem.IsDir(path)):
             raise NotADir("The path {0} specified is not a directory".format(path))
         
-        folders = fileSystem.GetFolders(path)
+        folders = self.fileSystem.GetSubFolders(path)
         
         if pattern:
             folders = self.MatchedFolders(folders, pattern)
@@ -47,8 +49,7 @@ class MoviesListing(object):
         foldersSubset = []
         
         for f in folders:
-            match = rp.match(f)
-            if match:
+            if rp.match(f):
                 foldersSubset.append(f)
                 
         return foldersSubset

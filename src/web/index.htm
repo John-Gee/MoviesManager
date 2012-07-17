@@ -27,60 +27,22 @@
 		<link rel="stylesheet" href="/style/${cssFile}" type="text/css">
 		% endfor
 		
-		<script>
-			$(function() {
-				var folders = [
-						"abc",
-						"def"
-				];
-				
-				$( "#folder" ).autocomplete({
-					source: function(req, add){
-					
-						xmlhttp=new XMLHttpRequest();
-						xmlhttp.onreadystatechange=function(add)
-					    {
-					        if (xmlhttp.readyState==4 && xmlhttp.status==200)
-					        {
-					        	var suggestions = [];
-					        	suggestions.push(xmlhttp.responseText);
-					        	add(suggestions)
-					        }
-				        }
-				        
-				        xmlhttp.open("GET","/GetMatchingPath?InitialPath=" + req, true);
-    					xmlhttp.send();
-					}
-				});
-			});		
-		</script>
-		
 		<h2>Hello MoviesManager user!</h2>
-		<div class="demo">
+		<div class="folderInput">
 			<div class="ui-widget">
 				<label for="folder">Folder:</label>
 				<input id="folder">
 			</div>
 		</div>
+		<div class="patternInput">
+			<div class="ui-widget">
+				<label for="pattern">Pattern:</label>
+				<input id="pattern">
+			</div>
+		</div>
 		
-		<form name="inputFolder" method="POST" action="/inputFolder">
-			folder: <input type="text" name="folder" value=${folder}>
-			<br/>
-			pattern: <input type="text" name="pattern" value=${pattern}>
-			<br/>
-			<input type="Submit">
-		</form>
-		% if folders:
-			folders: <br/>
-			% for fold in folders:
-				<b> ${fold} </b> <br/>
-			% endfor
-		% else:
-			no folder <br/>
-		% endif
+		<p id="folders"></p>
 		
-		% if not len(exception) == 0:
-			<font color="RED"> ${exception} </font>
-		% endif
+		<font color="RED"><p id="exception"></p></font>
 	</body>
 </html>

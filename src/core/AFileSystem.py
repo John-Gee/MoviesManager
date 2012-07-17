@@ -18,6 +18,12 @@ class AFileSystem(object):
         """Returns if the path specified is a directoryor not."""
         return
     
-    def GetFolders(self, path):
+    @abc.abstractmethod
+    def GetSubFolders(self, path):
         """Returns the subfolders in the current folder."""
+        return
+    
+    @abc.abstractmethod
+    def Complete(self, initialPath):
+        """Returns a list of paths that match the one given."""
         return

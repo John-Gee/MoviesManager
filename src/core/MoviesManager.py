@@ -7,13 +7,15 @@ Created on Jul 12, 2012
 from HTTPServer import HTTPServer
 from Configuration import Configuration
 
-from HelloWorld import HelloWorld
+from Web import Web
+from FileSystem import FileSystem
 
 class MoviesManager:
     def __init__(self):
         configuration = Configuration()
         port = int(configuration.config["port"])
-        self.httpServer = HTTPServer(port, HelloWorld)
+        fileSystem = FileSystem()
+        self.httpServer = HTTPServer(port, Web, fileSystem)
         
     def Start(self):
         self.httpServer.SmartMonitor()

@@ -60,7 +60,7 @@ class MockFileSystemTest(unittest.TestCase):
         
     def testEmptyGetFolders(self):
         mockFileSystem = MockFileSystem()
-        folders = mockFileSystem.GetFolders("")
+        folders = mockFileSystem.GetSubFolders("")
         self.assertEquals(0, len(folders))
         
     def testGetFoldersGoodFoldersButPath(self):
@@ -69,7 +69,7 @@ class MockFileSystemTest(unittest.TestCase):
         for p in paths:
             mockFileSystem.AddPath(p, True)
             
-        folders = mockFileSystem.GetFolders("notpath")
+        folders = mockFileSystem.GetSubFolders("notpath")
         self.assertEquals(0, len(folders))
         
     def testGetFoldersGoodFoldersGoodPath(self):
@@ -78,7 +78,7 @@ class MockFileSystemTest(unittest.TestCase):
         for p in paths:
             mockFileSystem.AddPath(p, True)
             
-        folders = mockFileSystem.GetFolders("path")
+        folders = mockFileSystem.GetSubFolders("path")
         self.assertEquals(3, len(folders))
 
 if __name__ == "__main__":

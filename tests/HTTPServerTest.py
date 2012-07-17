@@ -5,13 +5,16 @@ Created on Jul 14, 2012
 '''
 import threading
 from cherrypy import process
+from MockFileSystem import MockFileSystem
 import time
 import unittest
 from core.HTTPServer import HTTPServer
 
 class MockApplication(object):
-    def __init__(self, obj):
+    def __init__(self, obj, fileSystem):
         self.ready = False
+        self.fileSystem = fileSystem
+        
     def index(self):
         self.ready = True
         print "Mock ready"
@@ -22,7 +25,7 @@ class HTTPServerTest(unittest.TestCase):
     def setUpClass(self):
         self.port = 12345
         self.applicationClass = MockApplication
-        self.httpServer = HTTPServer(self.port, MockApplication)
+        self.httpServer = HTTPServer(self.port, MockApplication, MockFileSystem())
         self.thread = threading.Thread(target=self.httpServer.SmartMonitor)
         self.thread.daemon = True
         self.thread.start()
