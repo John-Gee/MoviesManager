@@ -52,8 +52,7 @@ class Web:
             exception = "An exception was raised: {0}".format(e)
         
         jsonResponse = json.dumps([folders, exception])
-        return jsonResponse
-        #return lookup.get_template(ServerDefinition.templateFile).render(folder=folder, pattern=pattern, folders=folders, exception=exception)
+        return jsonResponse        
     
     JSONInputFolder.exposed = True
     
