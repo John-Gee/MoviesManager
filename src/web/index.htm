@@ -1,19 +1,23 @@
 <%def name="testFunc(x)">
 	x is ${x}
 </%def>
-<!DOCTYPE html>
-<html lang="en">	
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">	
 	<head>
-		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>MoviesManager</title>
 	</head>
 	<body>
 		<% 
 		import os
 		import glob
+		from string import ascii_lowercase
+		
+		letters = ascii_lowercase
+		
 		jsLocation = "../libraries"
 		cssLocation = "../style"
-				
+		
 		jsFiles = glob.glob(jsLocation + "/*.js") + glob.glob(jsLocation + "/*/*.js")
 		cssFiles = glob.glob(cssLocation + "/*.css") + glob.glob(jsLocation + "/*/*.css")
 		%>
@@ -29,15 +33,19 @@
 		
 		<h1>Hello MoviesManager user!</h1>
 		
-		<div id="tabs">
+		<div id="vtab">
 			<ul>
-				<li><a href="#tabs-1">Manage</a></li>
-				<li><a href="#tabs-2">Settings</a></li>
+			    <li class="home"></li>
+			    <li class="login"></li>
+			    <li class="support"></li>
 			</ul>
-			<div id="tabs-1">
+			<div>
+				<h4>Manage</h4>
 				<p id="folders"></p>
+				HOME CONTENT
 			</div>
-			<div id="tabs-2">
+			<div>
+				<h4>Settings</h4>
 				<div class="folderInput">
 					<div class="ui-widget">
 						<label for="folder">Folder:</label>
@@ -50,7 +58,13 @@
 						<input id="pattern">
 					</div>
 				</div>
+				LOGIN CONTENT
 			</div>
+			<div>
+				<h4>Online Support</h4>
+				SUPPORT CONTENT
+			</div>
+
 		</div>
 		
 		
