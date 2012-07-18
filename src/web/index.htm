@@ -27,21 +27,32 @@
 		<link rel="stylesheet" href="/style/${cssFile}" type="text/css">
 		% endfor
 		
-		<h2>Hello MoviesManager user!</h2>
-		<div class="folderInput">
-			<div class="ui-widget">
-				<label for="folder">Folder:</label>
-				<input id="folder">
+		<h1>Hello MoviesManager user!</h1>
+		
+		<div id="tabs">
+			<ul>
+				<li><a href="#tabs-1">Manage</a></li>
+				<li><a href="#tabs-2">Settings</a></li>
+			</ul>
+			<div id="tabs-1">
+				<p id="folders"></p>
 			</div>
-		</div>
-		<div class="patternInput">
-			<div class="ui-widget">
-				<label for="pattern">Pattern:</label>
-				<input id="pattern">
+			<div id="tabs-2">
+				<div class="folderInput">
+					<div class="ui-widget">
+						<label for="folder">Folder:</label>
+						<input id="folder">
+					</div>
+				</div>
+				<div class="patternInput">
+					<div class="ui-widget">
+						<label for="pattern">Pattern:</label>
+						<input id="pattern">
+					</div>
+				</div>
 			</div>
 		</div>
 		
-		<p id="folders"></p>
 		
 		<font color="RED"><p id="exception"></p></font>
 	</body>

@@ -55,4 +55,45 @@ $(function() {
 				xmlhttp.send();
 			}
 		});
-	});		
+		
+		$( "#pattern" ).autocomplete({
+			source: function(req, add){
+				add(req.term);
+			},
+			select: function(event, ui) {
+				$("#pattern").val(ui.item.value);
+				$("#pattern").submit();
+				
+				xmlhttp=new XMLHttpRequest();
+				xmlhttp.onreadystatechange=function()
+			    {
+			        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			        {
+			        	var suggestions = jQuery.parseJSON(xmlhttp.responseText);
+			        	var folders = suggestions[0];
+			        	var exception = suggestions[1];
+			        	if(exception.length == 0)
+			        		msg = "";
+		        		else
+		        			msg = "An error happened: " + exception;
+			        	
+			        	document.getElementById("exception").innerHTML = msg;
+			    		
+			    		foldersHTML = ""
+			    		jQuery.each(folders, function(i, l) {
+			    			foldersHTML = foldersHTML + "<br/>" + l;
+			    		})
+			    		
+			    		document.getElementById("pattern").innerHTML = foldersHTML;
+			        	//add(suggestions)
+			        }
+		        }
+		        
+		        xmlhttp.open("GET","/JSONInputFolder?folder=" + $("#folder").val() + "&pattern=" + ui.item.value, true);
+				xmlhttp.send();
+			}
+		});
+	});
+$(function() {
+	$( "#tabs" ).tabs();
+});
