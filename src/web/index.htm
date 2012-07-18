@@ -6,14 +6,15 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>MoviesManager</title>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	</head>
 	<body>
 		<% 
 		import os
 		import glob
-		from string import ascii_lowercase
+		from string import ascii_uppercase
 		
-		letters = ascii_lowercase
+		letters = ascii_uppercase
 		
 		jsLocation = "../libraries"
 		cssLocation = "../style"
@@ -21,6 +22,7 @@
 		jsFiles = glob.glob(jsLocation + "/*.js") + glob.glob(jsLocation + "/*/*.js")
 		cssFiles = glob.glob(cssLocation + "/*.css") + glob.glob(jsLocation + "/*/*.css")
 		%>
+
 		<!-- scripts -->
 		% for jsLibrary in jsFiles:
 		<script type="text/javascript" src="libraries/${jsLibrary}"></script>
@@ -41,8 +43,27 @@
 			</ul>
 			<div>
 				<h4>Manage</h4>
-				<p id="folders"></p>
-				HOME CONTENT
+				<div id="tabs">
+                                    <ul>
+                                        <li><a href="#tabs-All">All</a></li>
+                                        <li><a href="#tabs-0">#</a></li>
+                                        % for letter in letters:
+                                            <li><a href="#tabs-${letter}">${letter}</a></li>
+                                        % endfor
+                                    </ul>
+                                    <div id="tabs-All">
+                                        All
+                                    </div>
+                                    <div id="tabs-0">
+                                        0
+                                    </div>
+                                    % for letter in letters:
+                                        <div id="tabs-${letter}">
+                                            ${letter}
+                                        </div>
+                                    % endfor
+                                    
+				</div>
 			</div>
 			<div>
 				<h4>Settings</h4>
@@ -58,11 +79,9 @@
 						<input id="pattern">
 					</div>
 				</div>
-				LOGIN CONTENT
 			</div>
 			<div>
 				<h4>Online Support</h4>
-				SUPPORT CONTENT
 			</div>
 
 		</div>
