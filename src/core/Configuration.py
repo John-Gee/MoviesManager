@@ -7,7 +7,7 @@ import sys
 import os
 import configobj
 from Definitions import ServerDefinition
-
+from librairies import ConfigPersist
 
 class Configuration(object):
     def __init__(self):
@@ -18,3 +18,6 @@ class Configuration(object):
         else:
             path = os.path.split(__file__)[0]  
         self.config = configobj.ConfigObj(os.path.join(path, ServerDefinition.configFile))
+        
+    def Save(self):
+        ConfigPersist.store(self.config)

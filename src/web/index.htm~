@@ -1,0 +1,92 @@
+<%def name="testFunc(x)">
+	x is ${x}
+</%def>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">	
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>MoviesManager</title>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	</head>
+	<body>
+		<% 
+		import os
+		import glob
+		from string import ascii_uppercase
+		
+		letters = ascii_uppercase
+		
+		jsLocation = "../libraries"
+		cssLocation = "../style"
+		
+		jsFiles = glob.glob(jsLocation + "/*.js") + glob.glob(jsLocation + "/*/*.js")
+		cssFiles = glob.glob(cssLocation + "/*.css") + glob.glob(jsLocation + "/*/*.css")
+		%>
+
+		<!-- scripts -->
+		% for jsLibrary in jsFiles:
+		<script type="text/javascript" src="libraries/${jsLibrary}"></script>
+		% endfor
+		
+		<!-- css -->
+		% for cssFile in cssFiles:
+		<link rel="stylesheet" href="/style/${cssFile}" type="text/css">
+		% endfor
+		
+		<h1>Hello MoviesManager user!</h1>
+		
+		<div id="vtab">
+			<ul>
+			    <li class="home"></li>
+			    <li class="login"></li>
+			    <li class="support"></li>
+			</ul>
+			<div>
+				<h4>Manage</h4>
+				<div id="tabs">
+                                    <ul>
+                                        <li><a href="#tabs-All">All</a></li>
+                                        <li><a href="#tabs-0">#</a></li>
+                                        % for letter in letters:
+                                            <li><a href="#tabs-${letter}">${letter}</a></li>
+                                        % endfor
+                                    </ul>
+                                    <div id="tabs-All">
+                                        All
+                                    </div>
+                                    <div id="tabs-0">
+                                        0
+                                    </div>
+                                    % for letter in letters:
+                                        <div id="tabs-${letter}">
+                                            ${letter}
+                                        </div>
+                                    % endfor
+                                    
+				</div>
+			</div>
+			<div>
+				<h4>Settings</h4>
+				<div class="folderInput">
+					<div class="ui-widget">
+						<label for="folder">Folder:</label>
+						<input id="folder">
+					</div>
+				</div>
+				<div class="patternInput">
+					<div class="ui-widget">
+						<label for="pattern">Pattern:</label>
+						<input id="pattern">
+					</div>
+				</div>
+			</div>
+			<div>
+				<h4>Online Support</h4>
+			</div>
+
+		</div>
+		
+		
+		<font color="RED"><p id="exception"></p></font>
+	</body>
+</html>

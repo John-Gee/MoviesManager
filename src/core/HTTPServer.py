@@ -35,10 +35,10 @@ class HTTPServer(object):
                 'tools.sessions.timeout'        : 5000,
                 'tools.staticdir.root'          : os.path.dirname(modulePath)
             },
-                        '/libraries':
+                        '/javascript':
             {
                 'tools.staticdir.on'            : True,
-                'tools.staticdir.dir'           : "libraries"
+                'tools.staticdir.dir'           : "javascript"
             },
                         '/style':
             {
